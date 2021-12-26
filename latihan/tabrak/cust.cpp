@@ -4,11 +4,11 @@
 typedef struct student
 {
     int rno;
-    char name[20];
+    char name[100];
     struct subject
     {
         int scode;
-        char sname[20];
+        char sname[100];
         int mark;
     }sub[3];
     int total;
@@ -21,7 +21,7 @@ void create(){
     int n, i/*student*/, j/*subject */;
 
     s = (student*)calloc(n,sizeof(student));
-    fp = fopen("data_murid.txt", "w");
+    fp = fopen("customer_data.txt", "w");
     printf("Enter how many students you want : ");
     scanf("%d", &n);
     for(i = 0; i< n; i++){
@@ -48,7 +48,7 @@ void display(){
     student sl;
     FILE *fp;
     int j;
-    fp = fopen("data_murid.txt", "r");
+    fp = fopen("customer_data.txt", "r");
     while(fread(&sl,sizeof(student), 1,fp)){
         printf("\n%-5d%-20s",sl.rno,sl.name);
         for(j= 0; j< 3; j++){
@@ -65,7 +65,7 @@ void append(){
     int n, i/*student*/, j/*subject */;
 
     s = (student*)calloc(n,sizeof(student));
-    fp = fopen("data_murid.txt", "a");
+    fp = fopen("customer_data.txt", "a");
     printf("Enter how many students you want : ");
     scanf("%d", &n);
     for(i = 0; i< n; i++){
@@ -90,7 +90,7 @@ void append(){
 void noofrec(){
     student sl;
     FILE *fp;
-    fp=fopen("data_murid.txt", "r");
+    fp=fopen("customer_data.txt", "r");
     fseek(fp,0,SEEK_END);
     int n = ftell(fp)/sizeof(student);
     printf("\n\nNO OF RECORDS = %d", n);
@@ -102,7 +102,7 @@ void search(){
     student sl;
     FILE *fp;
     int j,rno,found = 0; 
-    fp = fopen("data_murid.txt", "r");
+    fp = fopen("customer_data.txt", "r");
     printf("Enter rollno to Search : ");
     scanf("%d", &rno);
     while(fread(&sl,sizeof(student), 1,fp)){
@@ -125,7 +125,7 @@ void update(){
     student sl;
     FILE *fp, *fp1;
     int j,rno,found = 0; 
-    fp = fopen("data_murid.txt", "r");
+    fp = fopen("customer_data.txt", "r");
     fp1 = fopen("temp.txt", "w");
     printf("Enter rollno to Update : ");
     scanf("%d", &rno);
@@ -151,7 +151,7 @@ void update(){
     fclose(fp1);
     if(found){
         fp1 = fopen("temp.txt", "r");
-        fp = fopen("data_murid.txt", "w");
+        fp = fopen("customer_data.txt", "w");
 
         while(fread(&sl,sizeof(student),1,fp1)){
             fwrite(&sl,sizeof(student),1,fp);
@@ -168,7 +168,7 @@ void delete_rec(){
     student sl;
     FILE *fp, *fp1;
     int j,rno,found = 0; 
-    fp = fopen("data_murid.txt", "r");
+    fp = fopen("customer_data.txt", "r");
     fp1 = fopen("temp.txt", "w");
     printf("Enter rollno to delete : ");
     scanf("%d", &rno);
@@ -184,7 +184,7 @@ void delete_rec(){
         fclose(fp1);
     if(found){
         fp1 = fopen("temp.txt", "r");
-        fp = fopen("data_murid.txt", "w");
+        fp = fopen("customer_data.txt", "w");
 
         while(fread(&sl,sizeof(student),1,fp1)){
             fwrite(&sl,sizeof(student),1,fp);
